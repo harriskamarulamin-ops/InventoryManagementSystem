@@ -1,0 +1,59 @@
+@model IEnumerable<InventoryManagementSystem.Models.Sale>
+@section Title {
+    Sales History
+}
+
+<div class="d-flex justify-content-between align-items-center my-4">
+    <h2>Sale Invoice History</h2>
+    <a asp-action="Create" class="btn btn-success">+ Process New Sale Checkout</a>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6 col-lg-4">
+        <form method="get" class="d-flex">
+            <input type="text" name="searchTerm" class="form-control me-2" placeholder="Search by Invoice ID, Date or Product Name..." value="@ViewBag.SearchTerm" />
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+            @if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string))
+            {
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary ms-2 text-decoration-none">Clear</a>
+            }
+        </form>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <table class="table table-hover table-striped mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Date Processed</th>
+                    <th>Items Purchased</th>
+                    <th>Gross Invoice Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="4" class="text-center text-muted py-4">No point of sale records saved in database yet.</td></tr>
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">#INV-@item.Id</td>
+                        <td>@item.SaleDate.ToString("g")</td>
+                        <td>
+                            @foreach (var line in item.SaleItems)
+                            {
+                                <div class="small text-muted">
+                                    • @line.Product?.Name (@line.Product?.Variant) x @line.QuantitySold
+                                </div>
+                            }
+                        </td>
+                        <td class="text-success fw-bold">RM @item.TotalAmount.ToString("N2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

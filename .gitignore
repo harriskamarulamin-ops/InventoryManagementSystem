@@ -1,0 +1,25 @@
+## Ignore Visual Studio Temporary Files, Builds, and Databases
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+x64/
+x86/
+[Bb]uild/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio Cache/Options
+.vs/
+[Tt]est[Rr]esults/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## OS-generated files
+.DS_Store
+Thumbs.db

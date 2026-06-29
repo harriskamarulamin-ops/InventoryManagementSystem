@@ -1,0 +1,63 @@
+@model InventoryManagementSystem.Models.User
+@section Title {Register}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-md-11">
+            <div class="card shadow-lg border-0 overflow-hidden">
+                <div class="row g-0">
+                    <!-- Left side: Image Pane -->
+                    <div class="col-md-6 d-none d-md-block" style="background-image: url('/images/logo.png'); background-size: cover; background-position: center; min-height: 500px;">
+                    </div>
+                    <!-- Right side: Form Pane -->
+                    <div class="col-md-6 col-12 d-flex flex-column justify-content-center bg-white">
+                        <div class="card-header bg-white border-0 text-center pt-4">
+                            <h4 class="fw-bold mb-0 text-dark">IMS Registration</h4>
+                        </div>
+                        <div class="card-body px-4 py-2">
+                            <form asp-action="Register" method="post">
+                                @Html.AntiForgeryToken()
+                                <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                                <div class="mb-3">
+                                    <label class="form-label font-weight-bold small text-muted">Username</label>
+                                    <input asp-for="Username" class="form-control" required />
+                                    <span asp-validation-for="Username" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label font-weight-bold small text-muted">Email Address</label>
+                                    <input asp-for="Email" class="form-control" type="email" placeholder="example@mail.com" required />
+                                    <span asp-validation-for="Email" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label font-weight-bold small text-muted">Password</label>
+                                    <input name="password" type="password" class="form-control"  required />
+                                </div>
+
+                                <div class="mb-4">
+                                    <label asp-for="Role" class="form-label font-weight-bold small text-muted">Account Role</label>
+                                    <select asp-for="Role" class="form-select" required>
+                                        <option value="Admin">Admin (Full Control)</option>
+                                        <option value="User">User (Read-only + Transactions)</option>
+                                    </select>
+                                    <span asp-validation-for="Role" class="text-danger small"></span>
+                                </div>
+
+                                <button type="submit" class="btn btn-dark w-100 py-2">Create Account</button>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center py-3 bg-light border-0">
+                            <a asp-action="Login" class="text-decoration-none text-muted small">Already have an account? Login here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
